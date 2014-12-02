@@ -1,0 +1,353 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY swrl "http://www.w3.org/2003/11/swrl#" >
+    <!ENTITY swrlb "http://www.w3.org/2003/11/swrlb#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <!ENTITY TwitterOntology "http://www.semanticweb.org/michel/ontologies/2014/6/TwitterOntology#" >
+    <!ENTITY untitled-ontology-5 "http://www.semanticweb.org/michel/ontologies/2014/6/untitled-ontology-5#" >
+]>
+
+
+<rdf:RDF xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.w3.org/2002/07/owl"
+     xmlns:TwitterOntology="http://www.semanticweb.org/michel/ontologies/2014/6/TwitterOntology#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
+     xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:untitled-ontology-5="http://www.semanticweb.org/michel/ontologies/2014/6/untitled-ontology-5#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <Ontology rdf:about="http://www.semanticweb.org/michel/ontologies/2014/6/TwitterOntology"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/michel/ontologies/2014/6/TwitterOntology#follows -->
+
+    <ObjectProperty rdf:about="&TwitterOntology;follows">
+        <rdfs:range rdf:resource="&TwitterOntology;TwitterAccount"/>
+        <rdfs:domain rdf:resource="&TwitterOntology;TwitterAccount"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/michel/ontologies/2014/6/TwitterOntology#liked -->
+
+    <ObjectProperty rdf:about="&TwitterOntology;liked">
+        <rdfs:range rdf:resource="&TwitterOntology;Tweet"/>
+        <rdfs:domain rdf:resource="&TwitterOntology;TwitterAccount"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/michel/ontologies/2014/6/TwitterOntology#posts -->
+
+    <ObjectProperty rdf:about="&TwitterOntology;posts">
+        <rdfs:range rdf:resource="&TwitterOntology;Tweet"/>
+        <rdfs:domain rdf:resource="&TwitterOntology;TwitterAccount"/>
+    </ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/michel/ontologies/2014/6/TwitterOntology#createdAt -->
+
+    <DatatypeProperty rdf:about="&TwitterOntology;createdAt">
+        <rdfs:domain rdf:resource="&TwitterOntology;Tweet"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/michel/ontologies/2014/6/TwitterOntology#hashtag -->
+
+    <DatatypeProperty rdf:about="&TwitterOntology;hashtag">
+        <rdfs:domain rdf:resource="&TwitterOntology;Tweet"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/michel/ontologies/2014/6/TwitterOntology#location -->
+
+    <DatatypeProperty rdf:about="&TwitterOntology;location">
+        <rdfs:domain rdf:resource="&TwitterOntology;TwitterAccount"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/michel/ontologies/2014/6/TwitterOntology#numFollowers -->
+
+    <DatatypeProperty rdf:about="&TwitterOntology;numFollowers">
+        <rdfs:domain rdf:resource="&TwitterOntology;TwitterAccount"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/michel/ontologies/2014/6/TwitterOntology#numPagesFollowing -->
+
+    <DatatypeProperty rdf:about="&TwitterOntology;numPagesFollowing">
+        <rdfs:domain rdf:resource="&TwitterOntology;TwitterAccount"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/michel/ontologies/2014/6/TwitterOntology#pagename -->
+
+    <DatatypeProperty rdf:about="&TwitterOntology;pagename">
+        <rdfs:domain rdf:resource="&TwitterOntology;TwitterAccount"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/michel/ontologies/2014/6/TwitterOntology#popular -->
+
+    <DatatypeProperty rdf:about="&TwitterOntology;popular">
+        <rdfs:domain rdf:resource="&TwitterOntology;TwitterAccount"/>
+        <rdfs:range rdf:resource="&xsd;boolean"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/michel/ontologies/2014/6/TwitterOntology#text -->
+
+    <DatatypeProperty rdf:about="&TwitterOntology;text">
+        <rdfs:domain rdf:resource="&TwitterOntology;Tweet"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/michel/ontologies/2014/6/TwitterOntology#urlpage -->
+
+    <DatatypeProperty rdf:about="&TwitterOntology;urlpage">
+        <rdfs:domain rdf:resource="&TwitterOntology;TwitterAccount"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/michel/ontologies/2014/6/TwitterOntology#Tweet -->
+
+    <Class rdf:about="&TwitterOntology;Tweet"/>
+    
+
+
+    <!-- http://www.semanticweb.org/michel/ontologies/2014/6/TwitterOntology#TwitterAccount -->
+
+    <Class rdf:about="&TwitterOntology;TwitterAccount"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/michel/ontologies/2014/6/TwitterOntology#deutschalemao -->
+
+    <NamedIndividual rdf:about="&TwitterOntology;deutschalemao">
+        <rdf:type rdf:resource="&TwitterOntology;TwitterAccount"/>
+        <TwitterOntology:numFollowers rdf:datatype="&xsd;int">1660</TwitterOntology:numFollowers>
+        <TwitterOntology:numPagesFollowing rdf:datatype="&xsd;int">35</TwitterOntology:numPagesFollowing>
+        <TwitterOntology:pagename rdf:datatype="&xsd;string">Aprender alemão</TwitterOntology:pagename>
+        <TwitterOntology:location rdf:datatype="&xsd;string">Bremen</TwitterOntology:location>
+        <TwitterOntology:urlpage rdf:datatype="&xsd;string">https://twitter.com/deutschalemao</TwitterOntology:urlpage>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/michel/ontologies/2014/6/TwitterOntology#dilmabr -->
+
+    <NamedIndividual rdf:about="&TwitterOntology;dilmabr">
+        <rdf:type rdf:resource="&TwitterOntology;TwitterAccount"/>
+        <TwitterOntology:numFollowers rdf:datatype="&xsd;int">11843</TwitterOntology:numFollowers>
+        <TwitterOntology:numPagesFollowing rdf:datatype="&xsd;int">91</TwitterOntology:numPagesFollowing>
+        <TwitterOntology:location rdf:datatype="&xsd;string">Brasília</TwitterOntology:location>
+        <TwitterOntology:pagename rdf:datatype="&xsd;string">Dilma Rousseff</TwitterOntology:pagename>
+        <TwitterOntology:urlpage rdf:datatype="&xsd;string">https://twitter.com/dilmabr</TwitterOntology:urlpage>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/michel/ontologies/2014/6/TwitterOntology#lemondefr -->
+
+    <NamedIndividual rdf:about="&TwitterOntology;lemondefr">
+        <rdf:type rdf:resource="&TwitterOntology;TwitterAccount"/>
+        <TwitterOntology:numFollowers rdf:datatype="&xsd;int">2333984</TwitterOntology:numFollowers>
+        <TwitterOntology:numPagesFollowing rdf:datatype="&xsd;int">259</TwitterOntology:numPagesFollowing>
+        <TwitterOntology:pagename rdf:datatype="&xsd;string">Le Monde</TwitterOntology:pagename>
+        <TwitterOntology:location rdf:datatype="&xsd;string">Paris</TwitterOntology:location>
+        <TwitterOntology:urlpage rdf:datatype="&xsd;string">https://twitter.com/lemondefr</TwitterOntology:urlpage>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/michel/ontologies/2014/6/TwitterOntology#mitchbr91 -->
+
+    <NamedIndividual rdf:about="&TwitterOntology;mitchbr91">
+        <rdf:type rdf:resource="&TwitterOntology;TwitterAccount"/>
+        <TwitterOntology:numPagesFollowing rdf:datatype="&xsd;int">21</TwitterOntology:numPagesFollowing>
+        <TwitterOntology:numFollowers rdf:datatype="&xsd;int">7</TwitterOntology:numFollowers>
+        <TwitterOntology:pagename rdf:datatype="&xsd;string">Michel Jackson de So</TwitterOntology:pagename>
+        <TwitterOntology:location rdf:datatype="&xsd;string">Salvador</TwitterOntology:location>
+        <TwitterOntology:urlpage rdf:datatype="&xsd;string">https://twitter.com/mitchbr91</TwitterOntology:urlpage>
+        <TwitterOntology:follows rdf:resource="&TwitterOntology;deutschalemao"/>
+        <TwitterOntology:follows rdf:resource="&TwitterOntology;dilmabr"/>
+        <TwitterOntology:follows rdf:resource="&TwitterOntology;lemondefr"/>
+        <TwitterOntology:follows rdf:resource="&TwitterOntology;ufba"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/michel/ontologies/2014/6/TwitterOntology#ufba -->
+
+    <NamedIndividual rdf:about="&TwitterOntology;ufba">
+        <rdf:type rdf:resource="&TwitterOntology;TwitterAccount"/>
+        <TwitterOntology:numFollowers rdf:datatype="&xsd;int">11843</TwitterOntology:numFollowers>
+        <TwitterOntology:numPagesFollowing rdf:datatype="&xsd;int">91</TwitterOntology:numPagesFollowing>
+        <TwitterOntology:location rdf:datatype="&xsd;string">Bahia, Brasil</TwitterOntology:location>
+        <TwitterOntology:pagename rdf:datatype="&xsd;string">UFBA</TwitterOntology:pagename>
+        <TwitterOntology:urlpage rdf:datatype="&xsd;string">https://twitter.com/ufba</TwitterOntology:urlpage>
+    </NamedIndividual>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Rules
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description rdf:about="urn:swrl#p">
+        <rdf:type rdf:resource="&swrl;Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="urn:swrl#q">
+        <rdf:type rdf:resource="&swrl;Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="urn:swrl#l">
+        <rdf:type rdf:resource="&swrl;Variable"/>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="&swrl;Imp"/>
+        <swrl:head>
+            <rdf:Description>
+                <rdf:type rdf:resource="&swrl;AtomList"/>
+                <rdf:rest rdf:resource="&rdf;nil"/>
+                <rdf:first>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="&swrl;IndividualPropertyAtom"/>
+                        <swrl:propertyPredicate rdf:resource="&TwitterOntology;follows"/>
+                        <swrl:argument1 rdf:resource="urn:swrl#p"/>
+                        <swrl:argument2 rdf:resource="urn:swrl#q"/>
+                    </rdf:Description>
+                </rdf:first>
+            </rdf:Description>
+        </swrl:head>
+        <swrl:body>
+            <rdf:Description>
+                <rdf:type rdf:resource="&swrl;AtomList"/>
+                <rdf:rest>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="&swrl;AtomList"/>
+                        <rdf:first>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="&swrl;ClassAtom"/>
+                                <swrl:classPredicate rdf:resource="&TwitterOntology;TwitterAccount"/>
+                                <swrl:argument1 rdf:resource="urn:swrl#q"/>
+                            </rdf:Description>
+                        </rdf:first>
+                        <rdf:rest>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="&swrl;AtomList"/>
+                                <rdf:rest>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="&swrl;AtomList"/>
+                                        <rdf:rest rdf:resource="&rdf;nil"/>
+                                        <rdf:first>
+                                            <rdf:Description>
+                                                <rdf:type rdf:resource="&swrl;DatavaluedPropertyAtom"/>
+                                                <swrl:propertyPredicate rdf:resource="&TwitterOntology;location"/>
+                                                <swrl:argument2 rdf:resource="urn:swrl#l"/>
+                                                <swrl:argument1 rdf:resource="urn:swrl#q"/>
+                                            </rdf:Description>
+                                        </rdf:first>
+                                    </rdf:Description>
+                                </rdf:rest>
+                                <rdf:first>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="&swrl;DatavaluedPropertyAtom"/>
+                                        <swrl:propertyPredicate rdf:resource="&TwitterOntology;location"/>
+                                        <swrl:argument2 rdf:resource="urn:swrl#l"/>
+                                        <swrl:argument1 rdf:resource="urn:swrl#p"/>
+                                    </rdf:Description>
+                                </rdf:first>
+                            </rdf:Description>
+                        </rdf:rest>
+                    </rdf:Description>
+                </rdf:rest>
+                <rdf:first>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="&swrl;ClassAtom"/>
+                        <swrl:classPredicate rdf:resource="&TwitterOntology;TwitterAccount"/>
+                        <swrl:argument1 rdf:resource="urn:swrl#p"/>
+                    </rdf:Description>
+                </rdf:first>
+            </rdf:Description>
+        </swrl:body>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.5.0) http://owlapi.sourceforge.net -->
+
