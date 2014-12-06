@@ -2,19 +2,19 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-	<classpathentry kind="lib" path="/home/michel/Área de Trabalho/WebSemantica/TwitterAnnotator/lib/jena-core-2.11.1.jar"/>
-	<classpathentry kind="lib" path="/home/michel/Área de Trabalho/WebSemantica/TwitterAnnotator/lib/jena-iri-1.0.1.jar"/>
-	<classpathentry kind="lib" path="/home/michel/Área de Trabalho/WebSemantica/TwitterAnnotator/lib/jena-sdb-1.4.1.jar"/>
-	<classpathentry kind="lib" path="/home/michel/Área de Trabalho/WebSemantica/TwitterAnnotator/lib/log4j-1.2.16.jar"/>
-	<classpathentry kind="lib" path="/home/michel/Área de Trabalho/WebSemantica/TwitterAnnotator/lib/slf4j-api-1.6.4.jar"/>
-	<classpathentry kind="lib" path="/home/michel/Área de Trabalho/WebSemantica/TwitterAnnotator/lib/slf4j-log4j12-1.6.4.jar"/>
-	<classpathentry kind="lib" path="/home/michel/Área de Trabalho/WebSemantica/TwitterAnnotator/lib/twitter4j-core-4.0.1.jar"/>
-	<classpathentry kind="lib" path="/home/michel/Área de Trabalho/WebSemantica/TwitterAnnotator/lib/twitter4j-stream-4.0.1.jar"/>
-	<classpathentry kind="lib" path="/home/michel/Área de Trabalho/WebSemantica/TwitterAnnotator/lib/xercesImpl-2.11.0.jar"/>
-	<classpathentry kind="lib" path="/home/michel/Área de Trabalho/WebSemantica/TwitterAnnotator/lib/xml-apis-1.4.01.jar"/>
 	<classpathentry kind="lib" path="lib/pellet-jena-src.jar"/>
 	<classpathentry kind="lib" path="lib/pellet.jar"/>
 	<classpathentry kind="lib" path="lib/owlapi-distribution-3.5.0.jar"/>
 	<classpathentry kind="lib" path="lib/swrl-api.jar"/>
+	<classpathentry kind="lib" path="lib/jena-core-2.11.1.jar"/>
+	<classpathentry kind="lib" path="lib/jena-iri-1.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/jena-sdb-1.4.1.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-api-1.6.4.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-log4j12-1.6.4.jar"/>
+	<classpathentry kind="lib" path="lib/twitter4j-core-4.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/twitter4j-stream-4.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/xercesImpl-2.11.0.jar"/>
+	<classpathentry kind="lib" path="lib/xml-apis-1.4.01.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
