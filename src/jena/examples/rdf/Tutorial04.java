@@ -44,6 +44,7 @@ public class Tutorial04 extends Object {
 		
 		s.loadOWLFile();
 		//s.popularUsers();
-		s.likedPage();
+		//s.likedPage();
+		s.sameLocation();
     }
 }
