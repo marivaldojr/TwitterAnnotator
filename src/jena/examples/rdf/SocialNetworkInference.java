@@ -16,9 +16,19 @@ import com.hp.hpl.jena.ontology.Individual;
 import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.ontology.OntModelSpec;
+import com.hp.hpl.jena.rdf.model.InfModel;
+import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
+import com.hp.hpl.jena.rdf.model.RDFNode;
+import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.rdf.model.Statement;
+import com.hp.hpl.jena.rdf.model.StmtIterator;
+import com.hp.hpl.jena.reasoner.Reasoner;
+import com.hp.hpl.jena.reasoner.rulesys.GenericRuleReasoner;
+import com.hp.hpl.jena.reasoner.rulesys.Rule;
 import com.hp.hpl.jena.util.FileManager;
+import com.hp.hpl.jena.util.PrintUtil;
 import com.hp.hpl.jena.vocabulary.XSD;
 
 
@@ -265,4 +275,45 @@ public class SocialNetworkInference {
 			e.printStackTrace();
 		}
 	}
+	
+	public void popularUsers(){
+		String demoURI = "http://www.semanticweb.org/michel/ontologies/2014/6/TwitterOntology#";
+		PrintUtil.registerPrefix("twitter", demoURI);
+		
+		// create an empty model
+		Model model = ModelFactory.createDefaultModel();
+		//OntModel model = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM, null);
+		
+		// use the FileManager to find the input file
+		InputStream in = FileManager.get().open(fileName);
+		if (in == null) {
+			throw new IllegalArgumentException( "File: " + fileName + " not found"); 
+		}
+		model.read(in, "RDF/XML");
+
+        // Create a simple RDFS++ Reasoner.
+        StringBuilder sb = new StringBuilder();
+        
+        sb.append("[popularUsers: (?x twitter:numFollowers ?nf) (?x twitter:numPagesFollowing ?npf) greaterThan(?nf, ?npf)"
+        		+ "->  "
+        		+ "print(?x, is popular) print(?nf, followers) print(?npf,  followings)]"
+        		);
+        
+        Reasoner reasoner = new GenericRuleReasoner(Rule.parseRules(sb.toString()));
+
+        // Create inferred model using the reasoner and write it out.
+        InfModel inf = ModelFactory.createInfModel(reasoner, model);
+        inf.write(System.out);
+        
+        //Resource marcelo = inf.getResource(demoURI + "FGV"); 
+        //printStatements(inf, marcelo, null, null);
+	}
+	
+	public static void printStatements(Model m, Resource s, Property p, Resource o) {
+		 for (StmtIterator i = m.listStatements(s,p,o); i.hasNext(); ) {
+		 Statement stmt = i.nextStatement();
+		 System.out.println(" - " + PrintUtil.print(stmt));
+		 }
+	}
+
 }

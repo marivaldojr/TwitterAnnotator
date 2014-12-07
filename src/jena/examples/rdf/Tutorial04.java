@@ -26,22 +26,20 @@ public class Tutorial04 extends Object {
     
    
 	public static void main (String args[]) {
-       
+
+		/*
 		DataSetExtractor ex = new DataSetExtractor();
-//		ex.extractPages();
-//		ex.extractTweets();
-//		ex.extractTweetsMyTimeline();
-		//ex.extractFavorites("mitchbr91");
-	
+		ex.extractPages();
+		ex.extractTweets();
+		ex.extractTweetsMyTimeline();
+		ex.extractFavorites("mitchbr91");
+		*/
 			
 		SocialNetworkInference s = new SocialNetworkInference();
-//		s.createPages();
-//		s.createTweets();
-		s.createFavorites();
+		//s.createPages();
+		//s.createTweets();
+		//s.createFavorites();
 		
-		
-       
+		s.popularUsers();		       
     }
-    
-
 }
