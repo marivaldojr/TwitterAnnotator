@@ -6,21 +6,17 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.StringTokenizer;
 
 import com.hp.hpl.jena.datatypes.xsd.XSDDatatype;
 import com.hp.hpl.jena.ontology.DatatypeProperty;
 import com.hp.hpl.jena.ontology.Individual;
-import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.ontology.OntModelSpec;
 import com.hp.hpl.jena.rdf.model.InfModel;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
-import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
@@ -29,8 +25,6 @@ import com.hp.hpl.jena.reasoner.rulesys.GenericRuleReasoner;
 import com.hp.hpl.jena.reasoner.rulesys.Rule;
 import com.hp.hpl.jena.util.FileManager;
 import com.hp.hpl.jena.util.PrintUtil;
-import com.hp.hpl.jena.vocabulary.XSD;
-
 
 
 public class SocialNetworkInference {
@@ -48,13 +42,14 @@ public class SocialNetworkInference {
 	
 	public SocialNetworkInference(){
 		ontNamespace = "http://www.semanticweb.org/michel/ontologies/2014/6/TwitterOntology#";
-		fileName = "TwitterOntologyPopulated.owl";		
+		fileName = "TwitterOntologyPopulated.xml";		
+		PrintUtil.registerPrefix("twitter", ontNamespace);
 		ontologyModel = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM);
 	}
 	
 	public void createPages(){				
 		
-		file = new File("TwitterOntology.owl");		
+		file = new File("TwitterOntology.xml");		
 		ontologyFileName = file.getAbsolutePath();		
 				
 		in = FileManager.get().open(ontologyFileName);		
@@ -117,9 +112,7 @@ public class SocialNetworkInference {
 		    	if(!location.equals("null")){
 		    		loc = ontologyModel.getProperty(ontNamespace + "location");
 		    		ontologyModel.add(newPage, loc, location, XSDDatatype.XSDstring);
-		    	}  	
-		    	
-		    	
+		    	}		    	
 
 		    	line = br.readLine();		    	
 		    }
@@ -151,7 +144,7 @@ public class SocialNetworkInference {
 	}
 
 	public void createTweets(){
-		file = new File("TwitterOntologyPopulated.owl");
+		file = new File("TwitterOntologyPopulated.xml");
 		ontologyFileName = file.getAbsolutePath();		
 		
 		in = FileManager.get().open(ontologyFileName);		
@@ -224,7 +217,7 @@ public class SocialNetworkInference {
 
 	public void createFavorites(){
 		
-		file = new File("TwitterOntologyPopulated.owl");
+		file = new File("TwitterOntologyPopulated.xml");
 		ontologyFileName = file.getAbsolutePath();		
 		
 		in = FileManager.get().open(ontologyFileName);		
@@ -276,37 +269,13 @@ public class SocialNetworkInference {
 		}
 	}
 	
-	public void popularUsers(){
-		String demoURI = "http://www.semanticweb.org/michel/ontologies/2014/6/TwitterOntology#";
-		PrintUtil.registerPrefix("twitter", demoURI);
-		
-		// create an empty model
-		Model model = ModelFactory.createDefaultModel();
-		//OntModel model = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM, null);
-		
+	public void loadOWLFile(){
 		// use the FileManager to find the input file
 		InputStream in = FileManager.get().open(fileName);
 		if (in == null) {
 			throw new IllegalArgumentException( "File: " + fileName + " not found"); 
 		}
-		model.read(in, "RDF/XML");
-
-        // Create a simple RDFS++ Reasoner.
-        StringBuilder sb = new StringBuilder();
-        
-        sb.append("[popularUsers: (?x twitter:numFollowers ?nf) (?x twitter:numPagesFollowing ?npf) greaterThan(?nf, ?npf)"
-        		+ "->  "
-        		+ "print(?x, is popular) print(?nf, followers) print(?npf,  followings)]"
-        		);
-        
-        Reasoner reasoner = new GenericRuleReasoner(Rule.parseRules(sb.toString()));
-
-        // Create inferred model using the reasoner and write it out.
-        InfModel inf = ModelFactory.createInfModel(reasoner, model);
-        inf.write(System.out);
-        
-        //Resource marcelo = inf.getResource(demoURI + "FGV"); 
-        //printStatements(inf, marcelo, null, null);
+		ontologyModel.read(in, ontNamespace);
 	}
 	
 	public static void printStatements(Model m, Resource s, Property p, Resource o) {
@@ -315,5 +284,23 @@ public class SocialNetworkInference {
 		 System.out.println(" - " + PrintUtil.print(stmt));
 		 }
 	}
+	
+	public void popularUsers(){		
+        // Create a simple RDFS++ Reasoner.
+        StringBuilder sb = new StringBuilder();
+        
+        sb.append("[popularUsers: (?x twitter:numFollowers ?nf) (?x twitter:numPagesFollowing ?npf) greaterThan(?nf, ?npf)"
+        		+ "->  "
+        		+ "print(?x, is popular)]"
+        		);
+        
+        Reasoner reasoner = new GenericRuleReasoner(Rule.parseRules(sb.toString()));
 
+        // Create inferred model using the reasoner and write it out.
+        InfModel inf = ModelFactory.createInfModel(reasoner, ontologyModel);
+        inf.write(System.out);
+        
+        //Resource marcelo = inf.getResource(demoURI + "FGV"); 
+        //printStatements(inf, marcelo, null, null);
+	}
 }

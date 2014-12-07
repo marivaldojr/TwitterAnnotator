@@ -36,10 +36,12 @@ public class Tutorial04 extends Object {
 		*/
 			
 		SocialNetworkInference s = new SocialNetworkInference();
-		//s.createPages();
-		//s.createTweets();
-		//s.createFavorites();
-		
+		/*
+		s.createPages();
+		s.createTweets();
+		s.createFavorites();
+		*/
+		s.loadOWLFile();
 		s.popularUsers();		       
     }
 }
