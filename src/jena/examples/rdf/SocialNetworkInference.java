@@ -27,6 +27,10 @@ import com.hp.hpl.jena.util.FileManager;
 import com.hp.hpl.jena.util.PrintUtil;
 
 
+/**
+ * @author TestEnv
+ *
+ */
 public class SocialNetworkInference {
 	
 	private String ontNamespace;
@@ -285,13 +289,17 @@ public class SocialNetworkInference {
 		 }
 	}
 	
+	/**
+	 * Se o número de seguidores de um cara é maior que o número de páginas que ele segue,
+	 * então ele é um cara popular 
+	 */
 	public void popularUsers(){		
         // Create a simple RDFS++ Reasoner.
         StringBuilder sb = new StringBuilder();
-        
-        sb.append("[popularUsers: (?x twitter:numFollowers ?nf) (?x twitter:numPagesFollowing ?npf) greaterThan(?nf, ?npf)"
+        // TwitterAccount(?p), numFollowers(?p, ?nf), numPagesFollowing(?p, ?npf), greaterThan(?nf, ?npf) -> popular(?p, true)
+        sb.append("[popularUsers: (?p twitter:numFollowers ?nf) (?p twitter:numPagesFollowing ?npf) greaterThan(?nf, ?npf)"
         		+ "->  "
-        		+ "print(?x, is popular)]"
+        		+ "print(?p is popular), (?p twitter:popular 'true'^^xsd:boolean)]"
         		);
         
         Reasoner reasoner = new GenericRuleReasoner(Rule.parseRules(sb.toString()));
@@ -300,7 +308,26 @@ public class SocialNetworkInference {
         InfModel inf = ModelFactory.createInfModel(reasoner, ontologyModel);
         inf.write(System.out);
         
-        //Resource marcelo = inf.getResource(demoURI + "FGV"); 
-        //printStatements(inf, marcelo, null, null);
+        //Resource r = inf.getResource(ontNamespace + "FGV"); 
+        //printStatements(inf, r, null, null);
+	}
+	
+	/**
+	 * Se um cara curtiu um post de uma página, então ela é sugerida para ele
+	 */
+	public void likedPage(){
+        // Create a simple RDFS++ Reasoner.postedBy
+        StringBuilder sb = new StringBuilder();
+        // TwitterAccount(?p), liked(?p, ?x), postedBy(?x, ?q) -> follows(?p, ?q)
+        sb.append("[likePage: (?p twitter:liked ?x) (?x twitter:postedBy ?q)"
+        		+ "->  "
+        		+ "print(?p follows ?q) (?p twitter:follows ?q)]"
+        		);
+        
+        Reasoner reasoner = new GenericRuleReasoner(Rule.parseRules(sb.toString()));
+
+        // Create inferred model using the reasoner and write it out.
+        InfModel inf = ModelFactory.createInfModel(reasoner, ontologyModel);
+        inf.write(System.out);
 	}
 }

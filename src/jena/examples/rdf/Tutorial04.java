@@ -41,7 +41,9 @@ public class Tutorial04 extends Object {
 		s.createTweets();
 		s.createFavorites();
 		*/
+		
 		s.loadOWLFile();
-		s.popularUsers();		       
+		//s.popularUsers();
+		s.likedPage();
     }
 }
