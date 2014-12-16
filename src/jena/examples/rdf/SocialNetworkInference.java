@@ -311,6 +311,41 @@ public class SocialNetworkInference {
         //Resource r = inf.getResource(ontNamespace + "FGV"); 
         //printStatements(inf, r, null, null);
 	}
+
+	public void allRules(){
+		StringBuilder sb = new StringBuilder();
+        // TwitterAccount(?p), numFollowers(?p, ?nf), numPagesFollowing(?p, ?npf), greaterThan(?nf, ?npf) -> popular(?p, true)
+        sb.append("[popularUsers: (?p twitter:numFollowers ?nf) (?p twitter:numPagesFollowing ?npf) greaterThan(?nf, ?npf)"
+        		+ "->  "
+        		+ "print(?p is popular), (?p twitter:popular 'true'^^xsd:boolean)]"
+        		);
+
+        sb.append("[likePage: (?p twitter:liked ?x) (?q twitter:posts ?y) (?y twitter:text ?t) equal(?x, ?y)"
+        		+ "->  "
+        		+ "print(?p follows ?q) (?p twitter:follows ?q) print(curtiu ?t)]"
+        		);
+        sb.append("[seguemcomum: (?p twitter:follows ?x) (?y twitter:follows ?x) notEqual(?p, ?y)"
+        		+ "->  "
+        		+ "print(?p follows ?y) print(seguidor em comum ?x)]"
+        		);
+        sb.append("[sameHashtag:  (?p twitter:posts ?po) (?po twitter:hashtag ?lp) (?q twitter:posts ?qo) (?qo twitter:hashtag ?lq) "
+				+   "equal(?lp, ?lq) notEqual(?p, ?q)" 
+				+ "-> "
+				+"print(?p follows ?q)  (?p twitter:follows ?q) print( por hashtag ?lp)]" ); 
+		sb.append("[sameLocation: (?p twitter:location ?lp) (?q twitter:location ?lq)"
+        		+ " equal(?lp, ?lq) notEqual(?p, ?q)"
+        		+ "->  "
+        		+ "print(?p follows ?q) (?p twitter:follows ?q) print(localizacao ?lp)]"
+        		);
+        
+
+        
+        Reasoner reasoner = new GenericRuleReasoner(Rule.parseRules(sb.toString()));
+
+        // Create inferred model using the reasoner and write it out.
+        InfModel inf = ModelFactory.createInfModel(reasoner, ontologyModel);
+        inf.write(System.out);
+	}
 	
 	/**
 	 * Se um cara curtiu um post de uma página, então ela é sugerida para ele
@@ -335,7 +370,7 @@ public class SocialNetworkInference {
 		// Create a simple RDFS++ Reasoner.postedBy
         StringBuilder sb = new StringBuilder();
         // TwitterAccount(?p), liked(?p, ?x), postedBy(?x, ?q) -> follows(?p, ?q)
-        sb.append("[Teste: (?p twitter:follows ?x) (?y twitter:follows ?x) notEqual(?p, ?y)"
+        sb.append("[seguemcomum: (?p twitter:follows ?x) (?y twitter:follows ?x) notEqual(?p, ?y)"
         		+ "->  "
         		+ "print(?p follows ?y) print(seguidor em comum ?x)]"
         		);

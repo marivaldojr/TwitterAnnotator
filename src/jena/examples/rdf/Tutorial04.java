@@ -35,7 +35,8 @@ public class Tutorial04 extends Object {
 				+ "2. Post Curtido\n"
 				+ "3. Mesma Localização\n"
 				+ "4. Mesma Hashtag\n"
-				+ "5. Seguem paginas em comum");
+				+ "5. Seguem paginas em comum\n"
+				+ "6. Totas Regras\n");
 		int key = scanner.nextInt(); 
 		
 		SocialNetworkInference s = new SocialNetworkInference();
@@ -60,7 +61,9 @@ public class Tutorial04 extends Object {
 			case 5: 
 				s.seguemComum();
 				break;	
-				
+			case 6:
+				s.allRules();
+				break;
 			default: 
 				break;
 			}
