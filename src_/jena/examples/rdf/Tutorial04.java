@@ -18,8 +18,6 @@
 
 package jena.examples.rdf ;
 
-import java.util.Scanner;
-
 
 
 /** Tutorial 4 - create a model and write it in XML form to standard out
@@ -29,42 +27,24 @@ public class Tutorial04 extends Object {
    
 	public static void main (String args[]) {
 
-		Scanner scanner = new Scanner(System.in);
-		while(true){
-		System.out.println("\n\n1. Popular\n"
-				+ "2. Post Curtido\n"
-				+ "3. Mesma Localização\n"
-				+ "4. Mesma Hashtag\n"
-				+ "5. Seguem paginas em comum");
-		int key = scanner.nextInt(); 
-		
+		/*
+		DataSetExtractor ex = new DataSetExtractor();
+		ex.extractPages();
+		ex.extractTweets();
+		ex.extractTweetsMyTimeline();
+		ex.extractFavorites("mitchbr91");
+		*/
+			
 		SocialNetworkInference s = new SocialNetworkInference();
+		/*
+		s.createPages();
+		s.createTweets();
+		s.createFavorites();
+		*/
+		
 		s.loadOWLFile();
-			switch (key) {
-			case 1:
-				s.popularUsers();
-				break;
-			
-			case 2:
-				s.likedPage();
-				break;
-			
-
-			case 3:
-				s.sameLocation();
-				break;
-			
-			case 4: 
-				s.sameHashtag();
-				break;
-			case 5: 
-				s.seguemComum();
-				break;	
-				
-			default: 
-				break;
-			}
-		}
-	
+		//s.popularUsers();
+		//s.likedPage();
+		s.sameLocation();
     }
 }

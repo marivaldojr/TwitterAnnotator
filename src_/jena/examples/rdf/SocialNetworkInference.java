@@ -319,9 +319,9 @@ public class SocialNetworkInference {
         // Create a simple RDFS++ Reasoner.postedBy
         StringBuilder sb = new StringBuilder();
         // TwitterAccount(?p), liked(?p, ?x), postedBy(?x, ?q) -> follows(?p, ?q)
-        sb.append("[likePage: (?p twitter:liked ?x) (?q twitter:posts ?y) (?y twitter:text ?t) equal(?x, ?y)"
+        sb.append("[likePage: (?p twitter:liked ?x) (?x twitter:postedBy ?q)"
         		+ "->  "
-        		+ "print(?p follows ?q) (?p twitter:follows ?q) print(curtiu ?t)]"
+        		+ "print(?p follows ?q) (?p twitter:follows ?q)]"
         		);
         
         Reasoner reasoner = new GenericRuleReasoner(Rule.parseRules(sb.toString()));
@@ -330,39 +330,6 @@ public class SocialNetworkInference {
         InfModel inf = ModelFactory.createInfModel(reasoner, ontologyModel);
         inf.write(System.out);
 	}
-	
-	public void seguemComum(){
-		// Create a simple RDFS++ Reasoner.postedBy
-        StringBuilder sb = new StringBuilder();
-        // TwitterAccount(?p), liked(?p, ?x), postedBy(?x, ?q) -> follows(?p, ?q)
-        sb.append("[Teste: (?p twitter:follows ?x) (?y twitter:follows ?x) notEqual(?p, ?y)"
-        		+ "->  "
-        		+ "print(?p follows ?y) print(seguidor em comum ?x)]"
-        		);
-        
-        Reasoner reasoner = new GenericRuleReasoner(Rule.parseRules(sb.toString()));
-
-        // Create inferred model using the reasoner and write it out.
-        InfModel inf = ModelFactory.createInfModel(reasoner, ontologyModel);
-        inf.write(System.out);
-	
-	}
-	
-	/** * Se pessoas postam a mesma hashtag, então é sugerida para seguir */ 
-	public void sameHashtag(){ 
-		// Create a simple RDFS++ Reasoner.postedBy 
-		StringBuilder sb = new StringBuilder(); 
-		sb.append("[sameHashtag:  (?p twitter:posts ?po) (?po twitter:hashtag ?lp) (?q twitter:posts ?qo) (?qo twitter:hashtag ?lq) "
-				+   "equal(?lp, ?lq) notEqual(?p, ?q)" 
-				+ "-> "
-				+"print(?p follows ?q)  (?p twitter:follows ?q) print( por hashtag ?lp)]" ); 
-		Reasoner reasoner = new GenericRuleReasoner(Rule.parseRules(sb.toString()));
-	    InfModel inf = ModelFactory.createInfModel(reasoner, ontologyModel);
-        inf.write(System.out);
-	
-	}
-
-		// Create inferred model using the reasoner and write it out. InfModel inf = ModelFactory.createInfModel(reasoner, ontologyModel); inf.write(System.out); }
 	
 	/**
 	 * Se pessoas são da mesma localização, então é sugerida para seguir
@@ -371,10 +338,9 @@ public class SocialNetworkInference {
         // Create a simple RDFS++ Reasoner.postedBy
         StringBuilder sb = new StringBuilder();
         // TwitterAccount(?p), TwitterAccount(?q), location(?p, ?l), location(?q, ?l) -> follows(?p, ?q)
-        sb.append("[sameLocation: (?p twitter:location ?lp) (?q twitter:location ?lq)"
-        		+ " equal(?lp, ?lq) notEqual(?p, ?q)"
+        sb.append("[sameLocation: (?p twitter:location ?lp) (?q twitter:location ?lq) equal(?lp, ?lq) notEqual(?p, ?q)"
         		+ "->  "
-        		+ "print(?p follows ?q) (?p twitter:follows ?q) print(localizacao ?lp)]"
+        		+ "print(?p follows ?q) (?p twitter:follows ?q)]"
         		);
         
         Reasoner reasoner = new GenericRuleReasoner(Rule.parseRules(sb.toString()));
